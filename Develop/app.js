@@ -81,7 +81,72 @@ const internPrompts = [
         'type': 'input',
         'message': 'Please enter the Intern\'s School:'
     }
-]
+];
+
+const addManager = () => {
+    inquirer
+    .prompt(managerPrompts)
+    .then(managerAnswers => {
+        console.log(managerAnswers)
+        addEngineer()
+    });
+}
+
+const addEngineer = () => {
+    inquirer
+    .prompt(engineerPrompts)
+    .then(engineerAnswers => {
+        console.log(engineerAnswers)
+        inquirer
+        .prompt([
+            {
+            'name': 'confirm',
+            'type': 'confirm',
+            'message': 'Would you like to add another Engineer?'
+            }
+        ])
+        .then(nextEngineer =>{
+            if (nextEngineer.confirm){
+                addEngineer()
+            } else{
+                addIntern();
+            }
+        })
+    })
+};
+
+const addIntern = () => {
+    inquirer
+    .prompt(internPrompts)
+    .then(internAnswers => {
+        console.log(internAnswers)
+        inquirer
+        .prompt([
+            {
+            'name': 'confirm',
+            'type': 'confirm',
+            'message': 'Would you like to add another Intern?'
+            }
+        ])
+        .then(nextIntern =>{
+            if (nextIntern.confirm){
+                addIntern()
+            }
+        })
+    })
+}
+
+const init = () => {
+
+    addManager();
+    
+}
+
+
+
+
+
+init()
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will

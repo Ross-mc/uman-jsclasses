@@ -14,6 +14,75 @@ const render = require("./lib/htmlRenderer");
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
+const managerPrompts = [
+    {
+        'name': 'managerName',
+        'type': 'input',
+        'message': 'Please enter the Manager\'s name:'
+    },
+    {
+        'name': 'managerId',
+        'type': 'input',
+        'message': 'Please enter the Manager\'s ID number:'
+    },
+    {
+        'name': 'managerEmail',
+        'type': 'input',
+        'message': 'Please enter the Manager\'s email:'
+    },
+    {
+        'name': 'managerOfficeNUmber',
+        'type': 'input',
+        'message': 'Please enter the Manager\'s officeNumber:'
+    }
+]
+
+const engineerPrompts = [
+    {
+        'name': 'engineerName',
+        'type': 'input',
+        'message': 'Please enter the Engineer\'s name:'
+    },
+    {
+        'name': 'engineerEmail',
+        'type': 'input',
+        'message': 'Please enter the Engineer\'s email:'
+    },
+    {
+        'name': 'engineerID',
+        'type': 'input',
+        'message': 'Please enter the Engineer\'s ID:'
+    },
+    {
+        'name': 'engineerGithub',
+        'type': 'input',
+        'message': 'Please enter the Engineer\'s Github:'
+    }
+];
+
+const internPrompts = [
+    {
+        'name': 'internName',
+        'type': 'input',
+        'message': 'Please enter the Intern\'s name:'
+    },
+    {
+        'name': 'internEmail',
+        'type': 'input',
+        'message': 'Please enter the Intern\'s email:'
+    },
+    {
+        'name': 'internID',
+        'type': 'input',
+        'message': 'Please enter the Intern\'s ID:'
+    },
+    {
+        'name': 'internSchool',
+        'type': 'input',
+        'message': 'Please enter the Intern\'s School:'
+    }
+]
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!

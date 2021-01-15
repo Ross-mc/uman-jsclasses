@@ -83,62 +83,79 @@ const internPrompts = [
     }
 ];
 
-const addManager = () => {
-    inquirer
+const addManager = async () => {
+    await inquirer
     .prompt(managerPrompts)
     .then(managerAnswers => {
         console.log(managerAnswers)
-        addEngineer()
     });
+
+    return Promise.resolve();
+
+
 }
 
-const addEngineer = () => {
-    inquirer
+const addEngineer = async () => {
+    await inquirer
     .prompt(engineerPrompts)
     .then(engineerAnswers => {
         console.log(engineerAnswers)
-        inquirer
-        .prompt([
-            {
-            'name': 'confirm',
-            'type': 'confirm',
-            'message': 'Would you like to add another Engineer?'
-            }
-        ])
-        .then(nextEngineer =>{
-            if (nextEngineer.confirm){
-                addEngineer()
-            } else{
-                addIntern();
-            }
-        })
+        
+    });
+
+    let addNewEngineer = false;
+
+    await inquirer
+    .prompt([
+        {
+        'name': 'confirm',
+        'type': 'confirm',
+        'message': 'Would you like to add another Engineer?'
+        }
+    ])
+    .then(nextEngineer =>{
+        addNewEngineer = nextEngineer.confirm
     })
+
+    return addNewEngineer
 };
 
-const addIntern = () => {
-    inquirer
+const addIntern = async () => {
+    await inquirer
     .prompt(internPrompts)
     .then(internAnswers => {
         console.log(internAnswers)
-        inquirer
-        .prompt([
-            {
-            'name': 'confirm',
-            'type': 'confirm',
-            'message': 'Would you like to add another Intern?'
-            }
-        ])
-        .then(nextIntern =>{
-            if (nextIntern.confirm){
-                addIntern()
-            }
-        })
     })
+    let addNewIntern = false;
+
+    await inquirer
+    .prompt([
+        {
+        'name': 'confirm',
+        'type': 'confirm',
+        'message': 'Would you like to add another Intern?'
+        }
+    ])
+    .then(nextIntern =>{
+        addNewIntern = nextIntern.confirm
+    });
+
+    return addNewIntern
 }
 
-const init = () => {
+const init = async () => {
 
-    addManager();
+    await addManager();
+
+    let addingEngineers = true;
+    while(addingEngineers){
+        addingEngineers = await addEngineer();
+    }
+
+    let addingInterns = true;
+    while(addingInterns){
+        addingInterns = await addIntern();
+    }
     
 }
 

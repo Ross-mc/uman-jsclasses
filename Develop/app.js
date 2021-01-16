@@ -16,22 +16,22 @@ const render = require("./lib/htmlRenderer");
 
 const managerPrompts = [
     {
-        'name': 'managerName',
+        'name': 'name',
         'type': 'input',
         'message': 'Please enter the Manager\'s name:'
     },
     {
-        'name': 'managerId',
+        'name': 'id',
         'type': 'input',
         'message': 'Please enter the Manager\'s ID number:'
     },
     {
-        'name': 'managerEmail',
+        'name': 'email',
         'type': 'input',
         'message': 'Please enter the Manager\'s email:'
     },
     {
-        'name': 'managerOfficeNUmber',
+        'name': 'officeNumber',
         'type': 'input',
         'message': 'Please enter the Manager\'s officeNumber:'
     }
@@ -39,22 +39,22 @@ const managerPrompts = [
 
 const engineerPrompts = [
     {
-        'name': 'engineerName',
+        'name': 'name',
         'type': 'input',
         'message': 'Please enter the Engineer\'s name:'
     },
     {
-        'name': 'engineerEmail',
-        'type': 'input',
-        'message': 'Please enter the Engineer\'s email:'
-    },
-    {
-        'name': 'engineerID',
+        'name': 'id',
         'type': 'input',
         'message': 'Please enter the Engineer\'s ID:'
     },
     {
-        'name': 'engineerGithub',
+        'name': 'email',
+        'type': 'input',
+        'message': 'Please enter the Engineer\'s email:'
+    },
+    {
+        'name': 'github',
         'type': 'input',
         'message': 'Please enter the Engineer\'s Github:'
     }
@@ -62,32 +62,38 @@ const engineerPrompts = [
 
 const internPrompts = [
     {
-        'name': 'internName',
+        'name': 'name',
         'type': 'input',
         'message': 'Please enter the Intern\'s name:'
     },
     {
-        'name': 'internEmail',
-        'type': 'input',
-        'message': 'Please enter the Intern\'s email:'
-    },
-    {
-        'name': 'internID',
+        'name': 'id',
         'type': 'input',
         'message': 'Please enter the Intern\'s ID:'
     },
     {
-        'name': 'internSchool',
+        'name': 'email',
+        'type': 'input',
+        'message': 'Please enter the Intern\'s email:'
+    },
+    {
+        'name': 'shcool',
         'type': 'input',
         'message': 'Please enter the Intern\'s School:'
     }
 ];
 
+const manager = [];
+const engineers = [];
+const interns = [];
+
 const addManager = async () => {
     await inquirer
     .prompt(managerPrompts)
     .then(managerAnswers => {
-        console.log(managerAnswers)
+        const { name, id, email, officeNumber } = managerAnswers
+        const generatedManager = new Manager(name, id, email, officeNumber);
+        manager.push(generatedManager)
     });
 
     return Promise.resolve();
@@ -99,8 +105,9 @@ const addEngineer = async () => {
     await inquirer
     .prompt(engineerPrompts)
     .then(engineerAnswers => {
-        console.log(engineerAnswers)
-        
+        const { name, id, email, github } = engineerAnswers
+        const engineer = new Engineer(name, id, email, github);
+        engineers.push(engineer)
     });
 
     let addNewEngineer = false;
@@ -124,7 +131,9 @@ const addIntern = async () => {
     await inquirer
     .prompt(internPrompts)
     .then(internAnswers => {
-        console.log(internAnswers)
+        const { name, id, email, school } = internAnswers
+        const intern = new Intern(name, id, email, school);
+        interns.push(intern)
     })
     let addNewIntern = false;
 

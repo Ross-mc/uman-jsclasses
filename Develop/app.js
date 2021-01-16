@@ -168,10 +168,15 @@ const init = async () => {
 
     const html = render([...manager,...engineers,...interns]);
 
-    fs.writeFile(outputPath, html, (err) => {
+    await fs.writeFile(outputPath, html, (err) => {
         if (err) return console.log(err)
-        console.log('File Successfully Generated')
-    })
+        console.log('File Successfully Generated');
+        
+    });
+
+    // fs.open(outputPath, 'r', err => {
+    //     if (err) return console.log(err)
+    // })
 
 
     

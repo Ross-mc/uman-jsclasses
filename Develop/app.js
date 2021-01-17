@@ -4,15 +4,13 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+//third party node module for opening files in explorer
+const openExplorer = require('open-file-explorer');
 
 const OUTPUT_DIR = path.resolve(__dirname, "../output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-
-
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
 
 const managerPrompts = [
     {
@@ -98,7 +96,6 @@ const addManager = async () => {
 
     return Promise.resolve();
 
-
 }
 
 const addEngineer = async () => {
@@ -174,16 +171,13 @@ const init = async () => {
         
     });
 
-    // fs.open(outputPath, 'r', err => {
-    //     if (err) return console.log(err)
-    // })
-
-
+    //third party node module to open files in explorer - because the file is html it automatically opens in the users default browser
+    openExplorer(outputPath, err => {
+        if(err) {
+            console.log(err);
+        }
+    })
     
 }
-
-
-
-
 
 init()

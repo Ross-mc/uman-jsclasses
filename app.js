@@ -1,16 +1,16 @@
-const Manager = require("./lib/Manager");
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
+const Manager = require("./app/lib/Manager");
+const Engineer = require("./app/lib/Engineer");
+const Intern = require("./app/lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 //third party node module for opening files in explorer
 const openExplorer = require('open-file-explorer');
 
-const OUTPUT_DIR = path.resolve(__dirname, "../output");
+const OUTPUT_DIR = path.resolve(__dirname, "./output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-const render = require("./lib/htmlRenderer");
+const render = require("./app/lib/htmlRenderer");
 
 const managerPrompts = [
     {
